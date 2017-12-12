@@ -101,27 +101,15 @@ session_start();
                     <div class="col-md-6">
                         <h3>Pass percentage of students</h3>
                         
-                        <div class="">
                             
-                    <div id="chart_div"></div>
-                        </div>
-                        <!-- <?php 
-            foreach ($_SESSION['result1'] as $row1){
-                $year=$row1["y"];
-                $total=$row1["total"];
-                $fail=$row1["fail"];
-
-                $pass=($total-$fail)*100/($total);
-                echo "['".$year."', ".$pass."],";
-            } 
-        ?> -->
-                        
+                    <div id="chart_div" ></div>
+                        </div                        
                     </div>
                     <div class="col-md-6">
                         <h3>Results obtained by students</h3>
                         <div class="">
                             
-                            <div id="piechart" style="width: 500px; height: 300px;"></div>
+                            <div id="piechart" style="width: 500px; height: 400px;"></div>
                         </div>
                         
                     </div>
@@ -139,7 +127,7 @@ session_start();
 </html>
 
 <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart', 'line']});
+    google.charts.load('current', {'packages':['line']});
 google.charts.setOnLoadCallback(drawBasic);
 
 function drawBasic() {
@@ -164,18 +152,26 @@ function drawBasic() {
         // [0, 0, 0],   [1, 10, 12]
       ]);
 
+      
+
       var options = {
+        chart: {
+          title: '',
+        },
         hAxis: {
           title: 'year'
         },
         vAxis: {
           title: 'Pass percentage'
-        }
+        },
+        hAxis: {format: 'decimal'},
+        width: 500,
+        height: 400
       };
 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        var chart = new google.charts.Line(document.getElementById('chart_div'));
 
-      chart.draw(data, options);
+      chart.draw(data, google.charts.Line.convertOptions(options));
     }
 
 
