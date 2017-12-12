@@ -36,9 +36,9 @@ class DB {
      */
     public function connect() { 
 
-        $localhost = "127.0.0.1";
+        $localhost = "sms.cqecy47qtkvz.ap-northeast-1.rds.amazonaws.com";
         $username = "root";
-        $password = "";
+        $password = "rootpassword";
         $dbName = "sms";  
         
         // Try and connect to the database
