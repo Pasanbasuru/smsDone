@@ -1,16 +1,17 @@
 <?php 
 
-
 require_once('controller/user_controller.php');
+
 require_once('model/user_model.php');
 
 
 
-require_once('model/db_model.php');
-require_once('model/init.php');
-$googleClient = new Google_Client;
+require_once('model/db_model.php');	
+//require_once('model/init.php');
+
+//$googleClient = new Google_Client;
 $db = new DB();
-$auth =  new GoogleAuth($db, $googleClient);
+//$auth =  new GoogleAuth($db, $googleClient);
 
 $user_controller = new UserController();
 
