@@ -9,7 +9,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 	
 	switch ($type) {
 		case 'admin':
-				die("c");
+				
 			header("Location:admin_controller.php");
 			break;
 
