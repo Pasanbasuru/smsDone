@@ -87,6 +87,7 @@ class UserController
 			$_SESSION['id']=$id;
 			$_SESSION['fname']=$fname;
 			$_SESSION['lname']=$lname;
+            $_SESSION['type'] = $type;
 
 			return true;
 		}else{
@@ -124,7 +125,7 @@ class UserController
 		}
 		return $lname;
 	}
-
+    //get nic for the student portal
 	function getType($u){
 		
 		$type = "null";
@@ -137,6 +138,16 @@ class UserController
 
 
 	}
+
+    function getnic($u){
+        $fname="null";
+        $query="SELECT `nic` FROM user WHERE `username`=".$u."";
+        $result=self::$db->select($query);
+        if($result){
+            $nic=$result[0]['nic'];
+        }
+        return $nic;
+    }
 	function authenticate($u,$p){
 		
 	    //$db = new DB();
