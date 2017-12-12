@@ -64,7 +64,14 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
         	break;
         case 'add_degree':
         	$sar_controller->degree();
-        	break;										
+        	break;	
+
+        case 'reg_degree':
+        	$sar_controller->regDegree();	
+        	break;	
+        case 'view_degree':
+        	$sar_controller->viewDegree();	
+        	break;								
 		default:
 			
 			//header("Location:../view/sar.php");
@@ -116,6 +123,42 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			function degree(){
 				header("Location:../view/add_degree.php");
 			}
+
+			function regDegree(){
+ 		
+
+			$name = self::$db->quote($_POST['name']);
+			$duration = self::$db->quote($_POST['duration']);
+			$desc = self::$db->quote($_POST['des']);
+			$year = self::$db->quote($_POST['year']);
+
+			$checkDegree = self::$sar->checkDegree($name,$year);
+			if (!$checkDegree) {
+				$result = self::$sar->regDegree($name,$duration,$desc,$year);
+
+				if($result == 1){
+				
+					$result='<div class="alert alert-success">Successfully added..!!</div>';
+	            	header("Location:../view/sar_reg_degree.php?result=$result");
+				
+				}else{
+					$result='<div class="alert alert-danger">Scholarship already added..!!</div>';
+	            	header("Location:../view/sar_reg_degree.php?result=$result");
+				}
+			}else{
+				$result='<div class="alert alert-danger">This degree is already defined!!</div>';
+	            header("Location:../view/sar_reg_degree.php?result=$result");
+			}
+			
+			
+
+			
+		}
+
+		function viewDegree(){
+			header("Location:../view/view_degree.php");
+
+		}
 
 
 	 	}

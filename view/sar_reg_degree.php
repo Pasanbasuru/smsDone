@@ -6,6 +6,16 @@
 	    
 
 ?>
+<?php 
+@session_start();
+$result='';
+if(isset($_GET['result'])){
+    $result=$_GET['result'];
+}
+else{
+    $result=null;
+}
+ ?>
 
 
 <!DOCTYPE html>
@@ -20,6 +30,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+
+
 </head>
 
 <body class="home">
@@ -33,11 +46,11 @@
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li ><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Registration</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
+                        <li class="active"><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
@@ -101,9 +114,61 @@
                     </header>
                 </div>
                 <div class="user-dashboard">
-                 <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
 
-                </div>
+
+                <div class="modal-content">
+                        <div class="modal-header login-header">
+                            <h4 class="modal-title">Add Scholarship </h4>
+
+                        </div>   
+                        <div class="modal-body">
+                            <?php echo $result; ?>
+                            <form class="form-horizontal" action="../controller/sar_controller.php" method="post">
+                               
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Name of the Degree :</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="indexno" type="text" name="name" placeholder="name of the degree" />
+                                    </div>
+                                </div>
+
+                             
+
+                              <div class="form-group">
+                                <label class="control-label col-sm-2">Duration:</label>
+                                <div class="col-sm-10">
+                                  <input class="form-control" id="schol_type" type="text" name="duration" placeholder="time period in years " />
+                                </div>
+                              </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Description  :</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="samount" type="text" name="des" placeholder="Description" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Start Year  :</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="samount" type="text" name="year" placeholder="Start year of the Degree" />
+                                    </div>
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="add-project" data-dismiss="modal" name="op" value="reg_degree">
+                                    Register degree</button>
+                                    <button type="reset" class="add-project" data-dismiss="modal" value="Cancel">
+                                    Reset</button>
+                                   
+                                </div>
+
+                              
+                            </form>
+                        </div>
+                    </div>
+
+                
             </div>
         </div>
 

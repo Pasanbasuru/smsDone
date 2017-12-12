@@ -146,6 +146,25 @@
         return $result;
       }
 
+      function checkDegree($name,$year){
+
+        $query = "SELECT * FROM degree WHERE name = ".$name." and ".$year."";
+        $result = self::$db->select($query);
+
+        return $result;
+      }
+
+      function regDegree($name,$duration,$desc,$year){
+
+        $query = "INSERT INTO degree(name,duration,description,start_year) VALUES($name,$duration,$desc,$year)";
+
+         $result = self::$db->query($query);
+
+         return $result;
+         
+
+      }
+
 
 
 

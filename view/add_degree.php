@@ -20,6 +20,28 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
+  <!-- boostrap theme -->
+  <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap-theme.min.css">
+  <!-- datatables css -->
+  <link rel="stylesheet" type="text/css" href="assets/datatables/media/css/jquery.dataTables.min.css">
+  <!-- fileinput css -->
+  <link rel="stylesheet" type="text/css" href="assets/fileinput/css/fileinput.min.css">
+  <!-- fullcalendar css -->
+  <link rel="stylesheet" type="text/css" href="assets/fullcalendar/fullcalendar.min.css">  
+  <!-- keith calendar css -->
+  <link rel="stylesheet" type="text/css" href="assets/keith-calendar/jquery.calendars.picker.css"> 
+
+  <!-- custom css -->
+  <link rel="stylesheet" type="text/css" href="../custom/css/custom.css"> 
+
+  <!-- jquery -->
+  <script type="text/javascript" src="assets/jquery/jquery.min.js"></script>
+    
+
+
 </head>
 
 <body class="home">
@@ -33,11 +55,11 @@
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li ><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Registration</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
+                        <li class="active"><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
@@ -101,7 +123,33 @@
                     </header>
                 </div>
                 <div class="user-dashboard">
-                 <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
+
+                </div>
+                    <h1 style="text-align: center; padding-top: 5%;"> <strong>Degree Programs</strong> </h1>
+                    <br><br>  
+                    <div  style="padding-top: 5%; padding-left: 15%;">            
+                    <a href="sar_reg_degree.php"> <button type="button" class="btn btn-primary btn-lg" style="width: 80%;"> Register New Degree Program</button> </a>
+                    <hr>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-9" style="padding-left: 15%; width: 91%;">
+                            <div class="sales">
+                                 <h2>All Degree Programs</h2>
+                               <div class="btn-group">
+                                    <a href="../controller/sar_controller.php?op=view_degree"><button type="button" 
+                                   style="" class="btn btn-primary btn"  > View and Update Degree Programs </button> </a> <br><br> 
+                               </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
+                    </div>
+                 
+
+                   
 
                 </div>
             </div>
