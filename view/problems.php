@@ -163,7 +163,7 @@ if(isset($_SESSION['details'])){
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="form_email">Email *</label>
-                                            <input id="form_email" type="email" name="email" class="form-control" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
+                                            <input id="form_email" type="email" name="email" class="form-control" value="<?php echo $_SESSION['username'] ?>" placeholder="Please enter your email *" required="required" data-error="Valid email is required.">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>
@@ -177,7 +177,7 @@ if(isset($_SESSION['details'])){
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="form_phone">Subject</label>
-                                            <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please ebter subjects here *" required="required">
+                                            <input id="form_phone" type="tel" name="phone" class="form-control" placeholder="Please enter your subject here *" required="required">
                                             <div class="help-block with-errors"></div>
                                         </div>
                                     </div>

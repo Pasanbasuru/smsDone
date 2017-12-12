@@ -84,6 +84,9 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
         case 'Optional':
             $student_controller->optional();
             break;
+        case 'Upload_Photo':
+            $student_controller->uplaod_photo();
+            break;
 		default:
             header("Location:../view/student.php");
 			break;
@@ -245,6 +248,9 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 
 
 
+        }
+        function uplaod_photo(){
+            header("Location:../controller/student_detail.php");
         }
 
 
