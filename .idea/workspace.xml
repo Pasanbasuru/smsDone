@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7202b5d-c12b-4385-97bd-35425f3f24ee" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/view/images/profile_pic/32423.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/view/images/profile_pic/941440754V.jpg" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/student_controller.php" afterPath="$PROJECT_DIR$/controller/student_controller.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controller/user_controller.php" afterPath="$PROJECT_DIR$/controller/user_controller.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/problems.php" afterPath="$PROJECT_DIR$/view/problems.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,24 +19,59 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="user_controller.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="user_controller.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller/user_controller.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="231">
-              <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
-                <marker date="1513078521845" expanded="true" signature="1710:1756" ph="SELECT `id` user" />
-                <marker date="1513078521845" expanded="true" signature="1908:1962" ph="SELECT `firs... user" />
-                <marker date="1513078521845" expanded="true" signature="2128:2181" ph="SELECT `last... user" />
-                <marker date="1513078521845" expanded="true" signature="2387:2437" ph="SELECT `type... user" />
-                <marker date="1513078521845" expanded="true" signature="2614:2661" ph="SELECT `nic`... user" />
-                <marker date="1513078521845" expanded="true" signature="2891:2945" ph="SELECT `pass... user" />
+                <marker date="1513082050413" expanded="true" signature="1706:1752" ph="SELECT `id` user" />
+                <marker date="1513082050413" expanded="true" signature="1904:1958" ph="SELECT `firs... user" />
+                <marker date="1513082050413" expanded="true" signature="2124:2177" ph="SELECT `last... user" />
+                <marker date="1513082050413" expanded="true" signature="2383:2433" ph="SELECT `type... user" />
+                <marker date="1513082050413" expanded="true" signature="2610:2657" ph="SELECT `nic`... user" />
+                <marker date="1513082050413" expanded="true" signature="2887:2941" ph="SELECT `pass... user" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="problems.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/view/problems.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="179" column="150" lean-forward="true" selection-start-line="179" selection-start-column="150" selection-end-line="179" selection-end-column="150" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="student_detail.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/student_detail.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="367">
+              <caret line="206" column="80" lean-forward="false" selection-start-line="206" selection-start-column="76" selection-end-line="206" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="student_controller.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/controller/student_controller.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="597">
+              <caret line="252" column="61" lean-forward="false" selection-start-line="252" selection-start-column="61" selection-end-line="252" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>save_changes</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,6 +80,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/controller/user_controller.php" />
+        <option value="$PROJECT_DIR$/controller/student_controller.php" />
+        <option value="$PROJECT_DIR$/view/student_detail.php" />
+        <option value="$PROJECT_DIR$/view/problems.php" />
       </list>
     </option>
   </component>
@@ -98,6 +141,20 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="smsDone" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="smsDone" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -137,12 +194,12 @@
       <updated>1513074447372</updated>
       <workItem from="1513074450218" duration="568000" />
       <workItem from="1513075051038" duration="141000" />
-      <workItem from="1513075195675" duration="2644000" />
+      <workItem from="1513075195675" duration="6380000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3353000" />
+    <option name="totallyTimeSpent" value="7089000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
@@ -234,15 +291,39 @@
     <entry file="file://$PROJECT_DIR$/controller/user_controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
-          <caret line="11" column="16" lean-forward="false" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
           <folding>
-            <marker date="1513078521845" expanded="true" signature="1710:1756" ph="SELECT `id` user" />
-            <marker date="1513078521845" expanded="true" signature="1908:1962" ph="SELECT `firs... user" />
-            <marker date="1513078521845" expanded="true" signature="2128:2181" ph="SELECT `last... user" />
-            <marker date="1513078521845" expanded="true" signature="2387:2437" ph="SELECT `type... user" />
-            <marker date="1513078521845" expanded="true" signature="2614:2661" ph="SELECT `nic`... user" />
-            <marker date="1513078521845" expanded="true" signature="2891:2945" ph="SELECT `pass... user" />
+            <marker date="1513082050413" expanded="true" signature="1706:1752" ph="SELECT `id` user" />
+            <marker date="1513082050413" expanded="true" signature="1904:1958" ph="SELECT `firs... user" />
+            <marker date="1513082050413" expanded="true" signature="2124:2177" ph="SELECT `last... user" />
+            <marker date="1513082050413" expanded="true" signature="2383:2433" ph="SELECT `type... user" />
+            <marker date="1513082050413" expanded="true" signature="2610:2657" ph="SELECT `nic`... user" />
+            <marker date="1513082050413" expanded="true" signature="2887:2941" ph="SELECT `pass... user" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/student_controller.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="252" column="61" lean-forward="false" selection-start-line="252" selection-start-column="61" selection-end-line="252" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/student_detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="206" column="80" lean-forward="false" selection-start-line="206" selection-start-column="76" selection-end-line="206" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/problems.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="179" column="150" lean-forward="true" selection-start-line="179" selection-start-column="150" selection-end-line="179" selection-end-column="150" />
+          <folding />
         </state>
       </provider>
     </entry>
