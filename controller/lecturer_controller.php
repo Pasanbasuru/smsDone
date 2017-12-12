@@ -160,7 +160,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  				echo "no result";
  			}
  			
- 		}
+ 		} 
 
  		// Used for Add button in add final result model
  		function add_final_results(){
