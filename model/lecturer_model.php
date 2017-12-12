@@ -57,6 +57,7 @@
 
       function get_student_result($year,$subject){
         $query = "SELECT s_id,exam_grade FROM student_course where year=$year AND course_id=$subject ORDER BY s_id";
+        
 
         $result = self::$db->select($query);
 

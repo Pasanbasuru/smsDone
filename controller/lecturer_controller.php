@@ -167,6 +167,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			$year = self::$db->quote($_POST['year']);
 			$subject = self::$db->quote($_POST['subject']);
 
+
 			$_SESSION['year']=$_POST['year'];
 			$_SESSION['subject']=$_POST['subject'];
 
@@ -176,7 +177,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 				$_SESSION['student_list']=$result;
 				header("Location:../view/add_final_results_form.php");
 			}else{
-				// $result1 = self::$lecturer->add_to_student_course();
+				$result1 = self::$lecturer->add_to_student_course();
 				$result='<div class="alert alert-danger">You don`t have access to this...!!</div>';
                 header("Location:../view/lecturer_academic.php?result=$result");
 			}
