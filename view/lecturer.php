@@ -15,16 +15,12 @@
 		if(!isset($_SESSION['user'])){
 			header("Location:../index.php");
 		}
-
 ?>
 
+<!-- displaying the bar chart in home tab -->
 <?php
     $lect_username=$_SESSION['username'];
     $connect = mysqli_connect("localhost", "root", "", "sms");
-
-
-
-
     $query = "SELECT year as y,COUNT(s_id) as fail,(SELECT COUNT(s_id) FROM student_course WHERE course_id=(SELECT course_code FROM course where lect_username=$lect_username) AND year=y) as total FROM student_course WHERE course_id=(SELECT course_code FROM course where lect_username=$lect_username) AND exam_grade='W' GROUP BY YEAR";
     $result = mysqli_query($connect, $query);
 
@@ -33,18 +29,16 @@
 
 <!DOCTYPE html>
 <html>
-
-
-<head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../view/css/style2.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="test/main.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-</head>
+    <head>
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="../view/css/style2.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="test/main.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    </head>
 
 <body class="home">
     <div class="display-table">
@@ -55,6 +49,8 @@
                         <img src="../view/images/002.png" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
                     </a>
                 </div>
+
+                <!-- sidebar and tabs -->
                 <div class="navi">
                     <ul>
                         <li class="active"><a href="../controller/lecturer_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
@@ -66,6 +62,8 @@
                     </ul>
                 </div>
             </div>
+
+            <!-- Header Section -->
             <div class="col-md-10 col-sm-11 display-table-cell v-align">
                 <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
                 <div class="row">
@@ -124,23 +122,20 @@
                         </div>
                     </header>
                 </div>
+
+                <!-- body of dashboard -->
                 <div class="user-dashboard">
                     <h1>Lecturer</h1>
                     <div class="col-md-2">
-                        
                     </div>
                     <div class="col-md-8">
                         <!-- <div id="columnchart_material" style="width: 700px; height: 500px;"></div> -->
                         <div id="chart_div"></div>
                     </div>
                     <div class="col-md-2">
-                        
                     </div>
-
-
-                     
-                    
                 </div>
+
             </div>
         </div>
 
@@ -150,39 +145,7 @@
 
 </html>
 
-<!-- <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Total students ', 'Fail'],
-          <?php 
-            foreach ($result as $row){
-                echo "['".$row["y"]."', ".$row["total"].", ".$row["fail"]."],";
-            } 
-        ?>
-
-
-          // ['2014', 1000, 400],
-          // ['2015', 1170, 460],
-          // ['2016', 660, 1120],
-          // ['2017', 1030, 540]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Student progress for your subject',
-            subtitle: '',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script> -->
-
+<!-- script for the barchart -->
     <script type="text/javascript">
         google.charts.load('current', {'packages':['bar']});
         google.charts.setOnLoadCallback(drawChart);

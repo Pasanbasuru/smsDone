@@ -104,7 +104,7 @@ session_start();
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Name :</label>
                                 <div class="col-sm-10">
-                                    <input  class="form-control" id="name" type="text" name="name" placeholder="Student name here" required />
+                                    <input  class="form-control" id="name" type="text" name="name" placeholder="Student name here" required disabled />
                                     <!-- <p id="name"></p> -->
                                 </div>
                             </div>

@@ -99,14 +99,14 @@ session_start();
                 </div>
                 <div class="user-dashboard">
                     <div class="col-md-6">
-                        <h3>Pass percentage of students</h3>
+                        <h4>Year VS Pass percentage</h4>
                         
                             
                     <div id="chart_div" ></div>
                         </div                        
                     </div>
                     <div class="col-md-6">
-                        <h3>Results obtained by students</h3>
+                        <h4>Results Gained</h4>
                         <div class="">
                             
                             <div id="piechart" style="width: 500px; height: 400px;"></div>
