@@ -135,7 +135,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
         }
 
  		 function add_hostel(){
- 		     die('adrg');
+ 		     
              $name = self::$db->quote($_POST['name']);
              $indexno = self::$db->quote($_POST['indexno']);
              $course = self::$db->quote($_POST['course']);

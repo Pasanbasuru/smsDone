@@ -29,10 +29,12 @@ else{
         <div class="row display-table-row">
             <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
                 <div class="logo">
-                    <a href="home.html"><img src="../view/images/002.png" alt="merkery_logo" class="hidden-xs hidden-sm">
-                        <img src="../view/images/002.png" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
+                    <a href="home.html"><img src="../view/images/lecturer.png" alt="merkery_logo" class="hidden-xs hidden-sm">
+                        <img src="../view/images/lecturer.png" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
                     </a>
                 </div>
+
+                 <!-- sidebar and tabs -->
                 <div class="navi">
                     <ul>
                         <li><a href="../controller/lecturer_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
@@ -44,6 +46,8 @@ else{
                     </ul>
                 </div>
             </div>
+
+             <!-- Header Section -->
             <div class="col-md-10 col-sm-11 display-table-cell v-align">
                 <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
                 <div class="row">
@@ -102,12 +106,13 @@ else{
                         </div>
                     </header>
                 </div>
+
+                <!-- body of section -->
                 <div class="user-dashboard">
                     <h1>Academic Details</h1>
                     <?php echo $result; ?>
                     <div class="row">
                         <div class="col-md-4 col-sm-4 col-xs-12 ">
-
                             <div class="sales">
                                 <h2>Assignment Results</h2>
                                 <div class="btn-group">

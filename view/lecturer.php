@@ -45,8 +45,8 @@
         <div class="row display-table-row">
             <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
                 <div class="logo">
-                    <a href="home.html"><img src="../view/images/002.png" alt="merkery_logo" class="hidden-xs hidden-sm">
-                        <img src="../view/images/002.png" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
+                    <a href="home.html"><img src="../view/images/lecturer.png" alt="merkery_logo" class="hidden-xs hidden-sm">
+                        <img src="../view/images/lecturer.png" alt="merkery_logo" class="visible-xs visible-sm circle-logo">
                     </a>
                 </div>
 
@@ -123,7 +123,7 @@
                     </header>
                 </div>
 
-                <!-- body of dashboard -->
+                <!-- body of section -->
                 <div class="user-dashboard">
                     <h1>Lecturer</h1>
                     <div class="col-md-2">
