@@ -1,4 +1,5 @@
 <?php
+die("sa");
 ob_start();
 session_start();
 if(isset($_SESSION['type']) && isset($_SESSION['user'])){
@@ -28,7 +29,8 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			break;
 
 		case 'CAA_exam':
-			header("Location:sar_controller.php");
+
+			// lies here
 			break;
 			
 		default:
