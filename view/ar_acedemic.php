@@ -112,8 +112,14 @@
                     </header>
                 </div>
     <div class="user-dashboard">
-        
 
+        <div class="row">
+            <div class="col-md-2">
+
+            </div>
+            <div class="col-md-8">
+                <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="600" height="500" frameborder="0" scrolling="no"></iframe>
+            </div>
         
     </div>
 
