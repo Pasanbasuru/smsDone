@@ -1,19 +1,10 @@
-
 <?php
-@session_start();
-$result='';
-if(isset($_GET['result'])){
-    $result=$_GET['result'];
-}
-else{
-    $result=null;
-}
-if(isset($_GET['status'])){
-    $status=$_GET['status'];
-}
-else{
-    $status=null;
-}
+	@session_start();
+        if(!isset($_SESSION['user'])){
+            header("Location:../index.php");
+        }
+	    
+
 ?>
 
 
@@ -22,18 +13,13 @@ else{
 
 
 <head>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../view/css/style2.css">
-    <link rel="stylesheet" type="text/css" href="../view/css/style1.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="../view/js/jquery-3.2.1.min.js"></script>
-    <script src="../view/js/jquery.tabledit.min.js"></script>
-    <script src="../view/js/jquery.tabledit.js"></script>
-    <script src="../view/js/jquery.min.js"></script>
 </head>
 
 <body class="home">
@@ -47,12 +33,12 @@ else{
                 </div>
                 <div class="navi">
                     <ul>
-                        <li ><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Registration</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
-                        <li class="active"><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
+                        <li class="active"><a href="../controller/caa_exam_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Course Registration</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -115,25 +101,9 @@ else{
                     </header>
                 </div>
                 <div class="user-dashboard">
-                <div class="panel-heading">
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <?php echo $status; ?>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <?php echo $result; ?>
-                        </div>
-                    </div>
-                    <h4>
-                        <b>Student Details</b>
-                    </h4>
-                    <label><input type="text" name="search_text" id="search_text" placeholder="Search by User Details" class="form-control" /></label>
+                 <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
+
                 </div>
-
-
-                <div id="result"></div>
             </div>
         </div>
 
@@ -141,35 +111,5 @@ else{
     
 
 </body>
-<script>
-    $(document).ready(function(){
-
-        load_data();
-
-        function load_data(query)
-        {
-            $.ajax({
-                url:"fetch_degree.php",
-                method:"POST",
-                data:{query:query},
-                success:function(data)
-                {
-                    $('#result').html(data);
-                }
-            });
-        }
-        $('#search_text').keyup(function(){
-            var search = $(this).val();
-            if(search != '')
-            {
-                load_data(search);
-            }
-            else
-            {
-                load_data();
-            }
-        });
-    });
-</script>
 
 </html>
