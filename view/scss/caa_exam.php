@@ -1,32 +1,9 @@
 <?php
-	if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
-	        /* 
-	           Up to you which header to send, some prefer 404 even if 
-	           the files does exist for security
-	        */
-	        header( 'HTTP/1.0 403 Forbidden', TRUE, 403 );
-
-	        /* choose the appropriate page to redirect users */
-	        die( header( 'location: /error.php' ) );
-
-	    }
-
-	    @session_start();
-		if(!isset($_SESSION['user'])){
-			header("Location:../index.php");
-		}
-
-?>
-
-<?php
-    $lect_username=$_SESSION['username'];
-    $connect = mysqli_connect("localhost", "root", "", "sms");
-
-
-
-
-    $query = "SELECT year as y,COUNT(s_id) as fail,(SELECT COUNT(s_id) FROM student_course WHERE course_id=(SELECT course_code FROM course where lect_username=$lect_username) AND year=y) as total FROM student_course WHERE course_id=(SELECT course_code FROM course where lect_username=$lect_username) AND exam_grade='W' GROUP BY YEAR";
-    $result = mysqli_query($connect, $query);
+	@session_start();
+        if(!isset($_SESSION['user'])){
+            header("Location:../index.php");
+        }
+	    
 
 ?>
 
@@ -43,7 +20,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 
 <body class="home">
@@ -57,12 +33,12 @@
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a href="../controller/lecturer_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
-                        <li><a href="../controller/lecturer_controller.php?op=view_lecturer"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
-                        <li><a href="../controller/lecturer_controller.php?op=view_student"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student Details</span></a></li>
-                        <li><a href="../controller/lecturer_controller.php?op=view_academic"><i class="fa fa-book" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Academic</span></a></li>
-                        <!-- <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calender</span></a></li> -->
-                        <li><a href="../controller/lecturer_controller.php?op=view_report"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
+                        <li class="active"><a href="../controller/caa_exam_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Course Registration</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -125,105 +101,15 @@
                     </header>
                 </div>
                 <div class="user-dashboard">
-                    <h1>Lecturer</h1>
-                    <div class="col-md-2">
-                        
-                    </div>
-                    <div class="col-md-8">
-                        <!-- <div id="columnchart_material" style="width: 700px; height: 500px;"></div> -->
-                        <div id="chart_div"></div>
-                    </div>
-                    <div class="col-md-2">
-                        
-                    </div>
+                 <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="400" height="300" frameborder="0" scrolling="no"></iframe>
 
-
-                     
-                    
                 </div>
             </div>
         </div>
 
     </div>
+    
 
 </body>
 
 </html>
-
-<!-- <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Total students ', 'Fail'],
-          <?php 
-            foreach ($result as $row){
-                echo "['".$row["y"]."', ".$row["total"].", ".$row["fail"]."],";
-            } 
-        ?>
-
-
-          // ['2014', 1000, 400],
-          // ['2015', 1170, 460],
-          // ['2016', 660, 1120],
-          // ['2017', 1030, 540]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Student progress for your subject',
-            subtitle: '',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script> -->
-
-    <script type="text/javascript">
-        google.charts.load('current', {'packages':['bar']});
-        google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Total students', 'Fail'],
-          <?php 
-            foreach ($result as $row){
-                echo "['".$row["y"]."', ".$row["total"].", ".$row["fail"]."],";
-            } 
-        ?>
-          // ['2014', 1000, 400, 200],
-          // ['2015', 1170, 460, 250],
-          // ['2016', 660, 1120, 300],
-          // ['2017', 1030, 540, 350]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Student Progress with year',
-            subtitle: 'YEAR-TOTAL STUDENTS-FAIL',
-          },
-          bars: 'vertical',
-          vAxis: {format: 'decimal'},
-          height: 500,
-          colors: ['#1b9e77', '#d95f02', '#7570b3']
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('chart_div'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-
-        var btns = document.getElementById('btn-group');
-
-        btns.onclick = function (e) {
-
-          if (e.target.tagName === 'BUTTON') {
-            options.vAxis.format = e.target.id === 'none' ? '' : e.target.id;
-            chart.draw(data, google.charts.Bar.convertOptions(options));
-          }
-        }
-      }
-    </script>

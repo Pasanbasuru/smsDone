@@ -56,8 +56,13 @@
       }
 
       function get_student_result($year,$subject){
-        $query = "SELECT s_id,exam_grade FROM student_course where year=$year AND course_id=$subject ORDER BY s_id";
-        
+        // $query = "SELECT s_id,exam_grade FROM student_course where year=$year AND course_id=$subject ORDER BY s_id";
+
+        $query = "SELECT student_course.s_id,student.index_no,student_course.exam_grade FROM student,student_course 
+                  WHERE (student.s_id=student_course.s_id) 
+                  AND (student_course.course_id=$subject) 
+                  AND (student_course.year=$year) ORDER BY index_no";
+
 
         $result = self::$db->select($query);
 
@@ -81,7 +86,10 @@
       }
 
       function get_assignment_result($year,$subject){
-        $query = "SELECT s_id,assignment_grade FROM student_course where year=$year AND course_id=$subject ORDER BY s_id";
+        $query = "SELECT student_course.s_id,student.index_no,student_course.assignment_grade FROM student,student_course 
+                  WHERE (student.s_id=student_course.s_id) 
+                  AND (student_course.course_id=$subject) 
+                  AND (student_course.year=$year) ORDER BY index_no";
 
         $result = self::$db->select($query);
 

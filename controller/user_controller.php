@@ -28,12 +28,16 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 		case 'SAR_exam':
 			header("Location:sar_controller.php");
 			break;
+		case 'CAA_exam':	
+			header("Location:caa_exam_contoller.php");
+			break;
 
         case 'ar_acedemic':
             header("Location:controller/ar_acedemic_controller.php");
             break;
 
         default:
+
 			header( 'location: ../index.php' ) ;
 			break;
 	}

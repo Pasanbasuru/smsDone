@@ -7,6 +7,13 @@ if(isset($_GET['edit'])){
 else{
     $result=null;
 }
+//get the error message
+if(isset($_GET['msg'])){
+    $error=$_GET['msg'];
+}
+else{
+    $error=null;
+}
 ?>
 
 <?php
@@ -175,7 +182,7 @@ if(isset($_SESSION['details1'])){
                 <div class="panel-body">
                     <div class="form-group">
                         <div class="col-sm-10 col-sm-offset-2">
-                            <?php echo $result; ?>
+                            <?php echo $error; ?>
                         </div>
                     </div>
 

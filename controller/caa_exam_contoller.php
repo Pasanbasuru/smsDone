@@ -1,4 +1,5 @@
 <?php
+die("sa");
 ob_start();
 session_start();
 if(isset($_SESSION['type']) && isset($_SESSION['user'])){
@@ -24,7 +25,12 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			break;
 
 		case 'SAR_exam':
-			// SAR exam contoller is here
+			header("Location:sar_controller.php");
+			break;
+
+		case 'CAA_exam':
+
+			// lies here
 			break;
 			
 		default:
@@ -35,25 +41,25 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  }
 
  	// load the view
-	require('../view/sar.php');
+	require('../view/caa_exam.php');
 	
- 	require('../model/sar_model.php');
+ 	require('../model/caa_exam_model.php');
 	require('../model/db_model.php');
 
 	@$op = $_REQUEST['op'];
 
 	if(isset($_GET['edit_id'])){
-		$var1 = $_GET['edit_id']; //some_value
+		$var1 = $_GET['edit_id']; 
 		$op="edit_User";
 	}
 
-	$sar_controller = new SarController();
+	$caa_exam_controller = new SarController();
 	
 	switch ($op) {
 
 		case 'registration':
 		
-			$sar_controller->registration();
+			$caa_exam_controller->registration();
 			break;
 		case 'import_reg':
 			$sar_controller->import_reg();

@@ -9,7 +9,7 @@ if(isset($_SESSION['student_list'])){
 
 foreach ($_SESSION['student_list'] as $user) {
         $user_list .= "<tr>";
-		$user_list .= "<td>{$user['s_id']}</td>";
+		$user_list .= "<td>{$user['index_no']}</td>";
         // $user_list .= "<td><input type='text' name='".$user['s_id']."' value='".$user['exam_grade']."'/></td>";
         $user_list .= "<td><SELECT type='text' name='".$user['s_id']."' value='".$user['exam_grade']."'>
         <option>".$user['exam_grade']."</option>

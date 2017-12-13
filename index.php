@@ -4,7 +4,7 @@ require_once('controller/user_controller.php');
 
 require_once('model/user_model.php');
 
-
+	
 
 require_once('model/db_model.php');	
 //require_once('model/init.php');
@@ -16,7 +16,7 @@ $db = new DB();
 $user_controller = new UserController();
 
 @$op = $_REQUEST['op'];
-		
+	
 switch ($op) {
 
 	case 'login':

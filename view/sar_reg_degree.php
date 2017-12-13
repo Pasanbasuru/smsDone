@@ -1,6 +1,22 @@
+<?php
+	@session_start();
+        if(!isset($_SESSION['user'])){
+            header("Location:../index.php");
+        }
+	    
+
+?>
 <?php 
-session_start();
+@session_start();
+$result='';
+if(isset($_GET['result'])){
+    $result=$_GET['result'];
+}
+else{
+    $result=null;
+}
  ?>
+
 
 <!DOCTYPE html>
 <html>
@@ -14,9 +30,9 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-       
-  
+    
+
+
 </head>
 
 <body class="home">
@@ -30,12 +46,12 @@ session_start();
                 </div>
                 <div class="navi">
                     <ul>
-                        <li"><a href="../controller/lecturer_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
-                        <li><a href="../controller/lecturer_controller.php?op=view_lecturer"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
-                        <li><a href="../controller/lecturer_controller.php?op=view_student"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student Details</span></a></li>
-                        <li><a href="../controller/lecturer_controller.php?op=view_academic"><i class="fa fa-book" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Academic</span></a></li>
-                        <!-- <li><a href="#"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Calender</span></a></li> -->
-                        <li class="active"><a href="../controller/lecturer_controller.php?op=view_report"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
+                        <li ><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li><a href="../controller/sar_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
+                        <li><a href="../controller/sar_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Registration</span></a></li>
+                        <li><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
+                        <li class="active"><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
+                        <li><a href="../controller/sar_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -98,112 +114,67 @@ session_start();
                     </header>
                 </div>
                 <div class="user-dashboard">
-                    <div class="col-md-6">
-                        <h3>Pass percentage of students</h3>
-                        
-                            
-                    <div id="chart_div" ></div>
-                        </div                        
-                    </div>
-                    <div class="col-md-6">
-                        <h3>Results obtained by students</h3>
-                        <div class="">
-                            
-                            <div id="piechart" style="width: 500px; height: 400px;"></div>
+
+
+                <div class="modal-content">
+                        <div class="modal-header login-header">
+                            <h4 class="modal-title">Add Scholarship </h4>
+
+                        </div>   
+                        <div class="modal-body">
+                            <?php echo $result; ?>
+                            <form class="form-horizontal" action="../controller/sar_controller.php" method="post">
+                               
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Name of the Degree :</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="indexno" type="text" name="name" placeholder="name of the degree" />
+                                    </div>
+                                </div>
+
+                             
+
+                              <div class="form-group">
+                                <label class="control-label col-sm-2">Duration:</label>
+                                <div class="col-sm-10">
+                                  <input class="form-control" id="schol_type" type="text" name="duration" placeholder="time period in years " />
+                                </div>
+                              </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Description  :</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="samount" type="text" name="des" placeholder="Description" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">Start Year  :</label>
+                                    <div class="col-sm-10">
+                                        <input class="form-control" id="samount" type="text" name="year" placeholder="Start year of the Degree" />
+                                    </div>
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="add-project" data-dismiss="modal" name="op" value="reg_degree">
+                                    Register degree</button>
+                                    <button type="reset" class="add-project" data-dismiss="modal" value="Cancel">
+                                    Reset</button>
+                                   
+                                </div>
+
+                              
+                            </form>
                         </div>
-                        
                     </div>
-                    
-                    
-                    
-                </div>
+
+                
             </div>
         </div>
 
     </div>
+    
 
 </body>
 
 </html>
-
-<script type="text/javascript">
-    google.charts.load('current', {'packages':['line']});
-google.charts.setOnLoadCallback(drawBasic);
-
-function drawBasic() {
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('number', 'year');
-      data.addColumn('number', 'percentage');
-
-      data.addRows([
-
-        <?php 
-            foreach ($_SESSION['result1'] as $row1){
-                $year=$row1["y"];
-                $total=$row1["total"];
-                $fail=$row1["fail"];
-
-                $pass=($total-$fail)*100/($total);
-                echo "[".$year.", ".$pass."],";
-            } 
-        ?>
-        
-        // [0, 0, 0],   [1, 10, 12]
-      ]);
-
-      
-
-      var options = {
-        chart: {
-          title: '',
-        },
-        hAxis: {
-          title: 'year'
-        },
-        vAxis: {
-          title: 'Pass percentage'
-        },
-        hAxis: {format: 'decimal'},
-        width: 500,
-        height: 400
-      };
-
-        var chart = new google.charts.Line(document.getElementById('chart_div'));
-
-      chart.draw(data, google.charts.Line.convertOptions(options));
-    }
-
-
-
-       
-</script>
-
-<script type="text/javascript">
-     google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-
-        var data = google.visualization.arrayToDataTable([
-            ['Results', 'Percentage'],
-            <?php 
-                foreach ($_SESSION['result'] as $row){
-                    echo "['".$row["exam_grade"]."', ".$row["COUNT(s_id)"]."],";
-                } 
-            ?>
-          // ['Task', 'Hours per Day'],
-          // ['Work',     11],
-          // ['Eat',      2],
-          // ['Commute',  2],
-        ]);
-
-        var options = {
-          title: 'Percentage of Results'
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-        chart.draw(data, options);
-    }
-</script>
