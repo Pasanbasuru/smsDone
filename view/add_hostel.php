@@ -14,6 +14,8 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+     <script
+      src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 </head>
 
 <body class="home">
@@ -92,13 +94,6 @@ session_start();
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal" action="../controller/caa_academic_controller.php" method="post">
-
-                            <div class="form-group">
-                                <label class="control-label col-sm-2">Name :</label>
-                                <div class="col-sm-10">
-                                    <input  class="form-control" id="name" type="text" name="name" placeholder="Student name here" required />
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-2">Index Number :</label>
                                 <div class="col-sm-10">
@@ -107,30 +102,28 @@ session_start();
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-sm-2" for="radio">Course:</label>
+                                <label class="control-label col-sm-2">Name :</label>
                                 <div class="col-sm-10">
-                                    <div class="radio">
-                                        <label><input type="radio" name="course" value="IS" required>Information Systems</label>
-                                    </div>
-                                    <div class="radio">
-                                        <label><input type="radio" name="course" value="CS" required>Computer Science</label>
-                                    </div>
-
-
+                                    <input  class="form-control" id="name" type="text" name="name" placeholder="Student name here" required />
+                                    <!-- <p id="name"></p> -->
                                 </div>
                             </div>
+                            
                             <div class="form-group">
                                 <label class="control-label col-sm-2"  for="radio">Accept/Decline  :</label>
                                 <div class="col-sm-10">
                                     <div class="radio"><label><input type="radio" id="stype" name="stype" value="accept" required>Accept </label></div>
                                     <div class="radio"><label><input type="radio" id="stype" name="stype" value="decline" required>Decline </label></div>
+                                    <div class="radio"><label><input type="radio" id="stype" name="stype" value="pending" required>Pending </label></div>
+                                </div>
+                            </div>
 
 
                             <div class="modal-footer">
                                 <button type="submit" class="add-project" data-dismiss="modal" name="op" value="add_hostel">
                                     Add Student</button>
                                 <button type="reset" class="add-project" data-dismiss="modal" value="Cancel">
-                                    Cancel</button>
+                                    Reset</button>
 
                             </div>
 
@@ -148,3 +141,63 @@ session_start();
 </body>
 
 </html>
+
+
+<script>
+$(document).ready(function(){
+
+ load_data();
+
+ function load_data(query)
+ {
+  $.ajax({
+   url:"caa_academic_fetch_hostel.php",
+   method:"POST",
+   data:{query:query},
+   success:function(data)
+   {
+    $("#name").val(data);
+   }
+  });
+ }
+ $('#indexno').keyup(function(){
+  var search = $(this).val();
+  if(search != '')
+  {
+   load_data(search);
+  }
+  else
+  {
+   load_data();
+  }
+ });
+});
+</script>
+
+<!-- <script type="text/javascript">
+ 
+  function passData() {
+var ind_no = document.getElementById("indexno").value;
+var dataString = 'data_to_be_pass=' + ind_no;
+if (ind_no == '') {
+alert("Please Enter the Anything");
+} else {
+// AJAX code to submit form.
+$.ajax({
+type: "POST",
+url: "caa_academic_fetch_hostel.php",
+data: dataString,
+cache: false,
+success: function(data) {
+$("#name").html(data);
+$("p").addClass("alert alert-success");
+},
+error: function(err) {
+alert(err);
+}
+});
+}
+return false;
+}
+ 
+  </script> -->
