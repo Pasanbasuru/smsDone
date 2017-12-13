@@ -80,6 +80,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
          	$caa_academic_controller->reset();
         	break;
         case "add_hostel":
+            die();
             $caa_academic_controller->add_hostel();
             break;
 		default:
