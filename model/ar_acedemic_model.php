@@ -27,6 +27,15 @@
         return $result;
       }
 
+      function update_ar_acedmic($username,$gender,$dob,$tel,$email,$edu,$research,$course,$awards){
+
+
+            $query = "UPDATE `ar_acedemic` SET `gender`=$gender,`dob`=$dob,`telephone`=$tel,`email`=$email,`education`=$edu,`research`=$research,`courses`=$course,`awards`=$awards WHERE username =$username";
+//die($query);
+            $result = self::$db->query($query);
+
+            return $result;
+        }
       function addevent($eventdate,$eventtitle,$eventdes,$fname){
 
          $query="INSERT INTO events (eventdate,eventtitle,eventdes,file)

@@ -53,6 +53,9 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 		case 'view_ar_acedemic':
 			$aracedemic_controller->view_ar_acedemic();
 			break;
+        case 'update_ar_acedmic':
+            $aracedemic_controller->update_ar_acedmic();
+            break;
 		case 'view_student':
 			$aracedemic_controller->view_student();
 			break;
@@ -104,10 +107,34 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			}
 
  		}
+        function view_student(){
+            header("Location:../view/ar_acedemic_stdet.php");
+        }
 
- 		function view_student(){
- 			header("Location:../view/ar_acedemic_stdet.php");
- 		}
+ 		function update_ar_acedmic(){
+
+            $username=$_SESSION['username'];
+            $gender=self::$db->quote($_POST['gender']);
+            $dob=self::$db->quote($_POST['dob']);
+            $tel=self::$db->quote($_POST['tel']);
+            $email=self::$db->quote($_POST['email']);
+            $edu=self::$db->quote($_POST['edu']);
+            $research=self::$db->quote($_POST['research']);
+            $course=self::$db->quote($_POST['course']);
+            $awards=self::$db->quote($_POST['awards']);
+
+
+
+            $result = self::$ar_acedemic->update_ar_acedmic($username,$gender,$dob,$tel,$email,$edu,$research,$course,$awards);
+            if($result){
+                header("Location:../controller/ar_acedemic_controller.php?op=view_ar_acedemic");
+            }else{
+                header("Location:../view/ar_acedemic_profile.php");
+                echo "something wrong";
+            }
+
+
+        }
 
  		function manage_user(){
             header("Location:../view/ar_acedemic_manusr.php");
