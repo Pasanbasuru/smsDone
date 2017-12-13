@@ -79,16 +79,16 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
         	break;	
 
         case 'reg_course':
-        	$sar_controller->regCourse();	
+        	$caa_exam_controller->regCourse();	
         	break;	
         case 'view_course':
-        	$sar_controller->viewCourse();	
+        	$caa_exam_controller->viewCourse();	
         	break;	
         case 'edit_User':
-            $sar_controller->edit_user($var1);
+            $caa_exam_controller->edit_user($var1);
             break;	
         case 'Updated':
-            $sar_controller->updated();
+            $caa_exam_controller->updated();
             break;						
 		default:
 			
@@ -142,30 +142,34 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 				header("Location:../view/add_course.php");
 			}
 
-			function regDegree(){
+			function regCourse(){
  		
 
 			$name = self::$db->quote($_POST['name']);
-			$duration = self::$db->quote($_POST['duration']);
-			$desc = self::$db->quote($_POST['des']);
+			$code = self::$db->quote($_POST['code']);
+			$c_year = self::$db->quote($_POST['c_year']);
+			$des = self::$db->quote($_POST['des']);
 			$year = self::$db->quote($_POST['year']);
+			$credit = self::$db->quote($_POST['credit']);
+			$type = self::$db->quote($_POST['type']);
+			$sem = self::$db->quote($_POST['sem']);
 
-			$checkDegree = self::$sar->checkDegree($name,$year);
-			if (!$checkDegree) {
-				$result = self::$sar->regDegree($name,$duration,$desc,$year);
+			$checkCourse = self::$caa_exam->checkCourse($code,$year);
+			if (!$checkCourse) {
+				$result = self::$caa_exam->regCourse($name,$code,$c_year,$des,$year,$credit,$type);
 
 				if($result == 1){
 				
 					$result='<div class="alert alert-success">Successfully added..!!</div>';
-	            	header("Location:../view/sar_reg_degree.php?result=$result");
+	            	header("Location:../view/caa_exam_reg_degree.php?result=$result");
 				
 				}else{
-					$result='<div class="alert alert-danger">Scholarship already added..!!</div>';
-	            	header("Location:../view/sar_reg_degree.php?result=$result");
+					$result='<div class="alert alert-danger">Incorrect details..!!</div>';
+	            	header("Location:../view/caa_exam_reg_degree.php?result=$result");
 				}
 			}else{
 				$result='<div class="alert alert-danger">This degree is already defined!!</div>';
-	            header("Location:../view/sar_reg_degree.php?result=$result");
+	           header("Location:../view/caa_exam_reg_degree.php?result=$result");
 			}
 			
 			

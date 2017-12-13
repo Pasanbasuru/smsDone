@@ -35,17 +35,19 @@
         return $result;
       }
 
-      function checkDegree($name,$year){
+      function checkCourse($code,$year){
 
-        $query = "SELECT * FROM degree WHERE name = ".$name." and ".$year."";
+        $query = "SELECT * FROM Course WHERE course_code = ".$code." and ".$year."";
         $result = self::$db->select($query);
 
         return $result;
       }
 
-      function regDegree($name,$duration,$desc,$year){
+      function regCourse($name,$code,$c_year,$des,$year,$credit,$type,$sem){
 
-        $query = "INSERT INTO degree(name,duration,description,start_year) VALUES($name,$duration,$desc,$year)";
+        $query = "INSERT INTO course(course_name,course_code,course_year,credits,description,semester,c_type,year) VALUES($name,$code,$c_year,$credit,$des,$sem,$type,$year)";
+
+        die($query);
 
          $result = self::$db->query($query);
 

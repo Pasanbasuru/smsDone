@@ -107,7 +107,7 @@
                  <h1 style="text-align: center; padding-top: 5%;"> <strong>Degree Courses</strong> </h1>
                     <br><br>  
                     <div  style="padding-top: 5%; padding-left: 15%;">            
-                    <a href="caa_reg_course.php"> <button type="button" class="btn btn-primary btn-lg" style="width: 80%;"> Register New Course</button> </a>
+                    <a href="caa_exam_reg_course.php"> <button type="button" class="btn btn-primary btn-lg" style="width: 80%;"> Register New Course</button> </a>
                     <hr>
                     </div>
                     
