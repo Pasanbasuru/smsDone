@@ -5,7 +5,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 
 	$type = $_SESSION['type'];
 	
-	
+	// checks the user type
 	switch ($type) {
 		case 'admin':
 			header("Location:admin_controller.php");
@@ -34,16 +34,19 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 	
  }
 
- 	// load the view
+ 	// load the lecturer view
 	require('../view/lecturer.php');
 
+	// loading lecturer and db model
  	require('../model/lecturer_model.php');
 	require('../model/db_model.php');
 
 	@$op = $_REQUEST['op'];
 
+	// creates the object
 	$lecturer_controller = new LecturerController();
-	
+
+	// switches to different operats of view request
 	switch ($op) {
 		case 'view_lecturer':
 			$lecturer_controller->view_lecturer();
@@ -90,6 +93,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 	}
 
 
+// Declaring of lecturer_controller class and the functions
  	class LecturerController{
  		protected static $db;
  		protected static $lecturer;
@@ -99,10 +103,11 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			self::$lecturer=new LecturerModel(); 			
  		}
 
+ 		// lecturer profile
  		function view_lecturer(){
-
  			$lec_id=$_SESSION['username'];
  			$result = self::$lecturer->view_lecturer($lec_id);
+
  			if($result){
 				$_SESSION['value']=$result;
 				header("Location:../view/view_lecturer.php");
@@ -112,11 +117,14 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			
  		}
 
+ 		// redirect to view_student page
  		function view_student(){
  			header("Location:../view/view_student.php");
  		}
 
+ 		// update the details of lectures
  		function update_lecturer_info(){
+ 			// fetching data from form
  			$username=$_SESSION['username'];
  			$fname=self::$db->quote($_POST['fname']);
  			$lname=self::$db->quote($_POST['lname']);
@@ -129,31 +137,32 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			$course=self::$db->quote($_POST['course']);
  			$awards=self::$db->quote($_POST['awards']);
 
-
-
  			$result = self::$lecturer->update_lecturer_info($username,$fname,$lname,$gender,$dob,$tel,$email,$edu,$research,$course,$awards);
+
  			if($result){
  				header("Location:../controller/lecturer_controller.php?op=view_lecturer");
  			}else{
  				header("Location:../view/view_lecturer.php");
  				echo "something wrong";
  			}
- 			
- 			
  		}
 
+ 		// redirect to view_academic page
  		function view_academic(){
  			header("Location:../view/lecturer_academic.php");
  		}
 
+ 		// redirect to view_exams page
  		function view_exams(){
  			header("Location:../view/view_exams.php");
  		}
 
+ 		// displaying charts of the lecturer
  		function view_report(){
  			$lect_username=$_SESSION['username'];
  			$_SESSION['result'] = self::$lecturer->get_count_result();
  			$_SESSION['result1']= self::$lecturer->get_pass_list($lect_username);
+
  			if ($_SESSION['result'] && $_SESSION['result1']) {
  				header("Location:../view/lecturer_report.php");
  			}else{
@@ -162,11 +171,10 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			
  		} 
 
- 		// Used for Add button in add final result model
+ 		// Used for Add button in add final result model of lecturer_academic
  		function add_final_results(){
  			$year = self::$db->quote($_POST['year']);
 			$subject = self::$db->quote($_POST['subject']);
-
 
 			$_SESSION['year']=$_POST['year'];
 			$_SESSION['subject']=$_POST['subject'];
@@ -185,6 +193,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			
  		}
 
+ 		// update the final results of form update_final_results_form
  		function update_final_results(){
  			$user_username=self::$db->quote($_SESSION['username']);
  			$year=self::$db->quote($_SESSION['year']);
@@ -192,29 +201,24 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			$type=self::$db->quote(final_result);	
 
  			foreach ($_SESSION['student_list'] as $user) {
-			        $s_id =self::$db->quote($user['s_id']);
-					$final_result = self::$db->quote($_POST[$user['s_id']]);
+			    $s_id =self::$db->quote($user['s_id']);
+				$final_result = self::$db->quote($_POST[$user['s_id']]);
 
-					$result = self::$lecturer->update_final_results($s_id,$final_result);
+				$result = self::$lecturer->update_final_results($s_id,$final_result);
 
-					if($result){
-						
-						$result_edited = self::$lecturer->update_edited_user($user_username,$year,$subject,$type);
-						$result='<div class="alert alert-success">Successfully updated..!!</div>';
-                		header("Location:../view/lecturer_academic.php?result=$result");
-					}else{
-						echo "something wrong";
-					}
-
-					// echo $s_id;
-					// echo $final_result;
-					
+				if($result){
+					$result_edited = self::$lecturer->update_edited_user($user_username,$year,$subject,$type);
+					$result='<div class="alert alert-success">Successfully updated..!!</div>';
+                	header("Location:../view/lecturer_academic.php?result=$result");
+				}else{
+					echo "something wrong";
+				}
 			}
 			
 
  		}
 
- 		// Used for Add button in add assignment result model
+ 		// Used for Add button in add assignment result model of lecturer academi
 
  		function add_assignment_results(){
  			$year = self::$db->quote($_POST['year']);
@@ -235,6 +239,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			}
  		}
 
+	// update the assignment final results of form update_assignment_results_form 		
  		function update_assignment_results(){
  			$user_username=self::$db->quote($_SESSION['username']);
  			$year=self::$db->quote($_SESSION['year']);
@@ -242,27 +247,23 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			$type=self::$db->quote(assignment_result);
 
  			foreach ($_SESSION['student_list'] as $user) {
-			        $s_id =self::$db->quote($user['s_id']);
-					$assignment_result = self::$db->quote($_POST[$user['s_id']]);
+			    $s_id =self::$db->quote($user['s_id']);
+				$assignment_result = self::$db->quote($_POST[$user['s_id']]);
 
-					$result = self::$lecturer->update_assignment_results($s_id,$assignment_result);
+				$result = self::$lecturer->update_assignment_results($s_id,$assignment_result);
 
-					if($result){
-						
-						$result_edited = self::$lecturer->update_edited_user($user_username,$year,$subject,$type);
-						$result='<div class="alert alert-success">Successfully updated..!!</div>';
-                		header("Location:../view/lecturer_academic.php?result=$result");
-					}else{
-						echo "something wrong";
-					}
+				if($result){
+					$result_edited = self::$lecturer->update_edited_user($user_username,$year,$subject,$type);
+					$result='<div class="alert alert-success">Successfully updated..!!</div>';
+                	header("Location:../view/lecturer_academic.php?result=$result");
+				}else{
+					echo "something wrong";
+				}		
 
-					// echo $s_id;
-					// echo $final_result;
-					
 			}
-
  		}
 
+ 		// view all results of students of lecturer with index no
  		function view_student_results(){
  			$year = self::$db->quote($_POST['year']);
 			$subject = self::$db->quote($_POST['subject']);
@@ -287,7 +288,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 				$edited_user_assignment='Not edited yet';
 			}
 			
-
+			// these values are got in view_result form
 			$_SESSION['year']=$_POST['year'];
 			$_SESSION['subject']=$_POST['subject'];
 			$_SESSION['edited_final']=$edited_user_final;
@@ -301,8 +302,6 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			}else{
 				$result='<div class="alert alert-danger">You don`t have access to this...!!</div>';
                 header("Location:../view/lecturer_academic.php?result=$result");
-				// header("Location:../view/lecturer_academic.php");
-				// echo "something wrong";
 			}
  		}
 

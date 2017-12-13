@@ -11,32 +11,30 @@
 
     }
 
+// Declaring of lecturer model and the functions
     class LecturerModel{
       protected static $db;
 
       function __construct(){
         self::$db = new DB();
-
       } 
 
+// Select all the details of lecturer with the id
       function view_lecturer($lec_id){
         $query = "SELECT * FROM `lecturer` WHERE username = ".$lec_id." ";
-
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// Update the lecturer details
       function update_lecturer_info($username,$fname,$lname,$gender,$dob,$tel,$email,$edu,$research,$course,$awards){
-        // $query = "UPDATE `lecturer` SET `first_name`=$fname,`last_name`=$lname,`gender`=$gender,`dob`=$dob,`telephone`=$tel,`email`=$email,`education`=$edu,`research`=$research,`course`=$course,`awards`=$awards WHERE username=$username";
-
         $query = "UPDATE `lecturer` SET `gender`=$gender,`dob`=$dob,`telephone`=$tel,`email`=$email,`education`=$edu,`research`=$research,`courses`=$course,`awards`=$awards WHERE username =$username";
 
         $result = self::$db->query($query);
-
         return $result;
       }
 
+// Adding the students to student course
       function add_to_student_course(){
         $query = "SELECT s_id FROM student ORDER BY s_id";
         $result = self::$db->select($query);
@@ -45,46 +43,40 @@
           $student_id=$data['s_id'];
 
           $query="INSERT INTO student_course(s_id,course_id,exam_grade,assignment_grade,start_date,end_date,attendance,year)
-         VALUES ($student_id,'','','','','','','')";
+            VALUES ($student_id,'','','','','','','')";
 
-         $result1 = self::$db->query($query);
-
-        return $result1;
-
+          $result1 = self::$db->query($query);
+          return $result1;
         }
-
       }
 
+// Get results of the student year and subject wise
       function get_student_result($year,$subject){
-        // $query = "SELECT s_id,exam_grade FROM student_course where year=$year AND course_id=$subject ORDER BY s_id";
-
         $query = "SELECT student_course.s_id,student.index_no,student_course.exam_grade FROM student,student_course 
                   WHERE (student.s_id=student_course.s_id) 
                   AND (student_course.course_id=$subject) 
                   AND (student_course.year=$year) ORDER BY index_no";
-
-
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// update the final results of students in student_course table
       function update_final_results($s_id,$final_result){
         $query="UPDATE  `student_course` SET `exam_grade`=$final_result WHERE s_id=$s_id";
 
         $result = self::$db->query($query);
-
         return $result;
       }
 
+// update the edited user detailsin last_edited table
       function update_edited_user($user_username,$year,$subject,$type){
         $query="UPDATE  `last_edited` SET `edited_user_name`=$user_username WHERE course_code=$subject AND course_year=$year AND type=$type";
 
         $result = self::$db->query($query);
-
         return $result;
       }
 
+// Get assignment results of the student year and subject wise
       function get_assignment_result($year,$subject){
         $query = "SELECT student_course.s_id,student.index_no,student_course.assignment_grade FROM student,student_course 
                   WHERE (student.s_id=student_course.s_id) 
@@ -92,10 +84,10 @@
                   AND (student_course.year=$year) ORDER BY index_no";
 
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// update the final assignment results of students in student_course table
       function update_assignment_results($s_id,$assignment_result){
         $query="UPDATE  `student_course` SET `assignment_grade`=$assignment_result WHERE s_id=$s_id";
 
@@ -104,49 +96,45 @@
         return $result;
       }
 
+// view all the student results
       function view_result($year,$subject){
         $query = "SELECT s_id,assignment_grade,exam_grade FROM student_course where year=$year AND course_id=$subject ORDER BY s_id";
 
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// get the lecturer id who edited the results at last
       function get_edited_final($year,$subject){
         $query = "SELECT edited_user_name FROM last_edited where course_year=$year AND course_code=$subject AND type='final_result'";
 
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// get the lecturer id who edited the assignment results at last
       function get_edited_assignment($year,$subject){
         $query = "SELECT edited_user_name FROM last_edited where course_year=$year AND course_code=$subject AND type='assignment_result'";
 
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// get the no of exam grades and grades for the pie chart
       function get_count_result(){
         $query = "SELECT exam_grade,COUNT(s_id) FROM student_course GROUP BY exam_grade";
 
         $result = self::$db->select($query);
-
         return $result;
       }
 
+// get the list of pass student of the lecturer subject with year
       function get_pass_list($lect_username){
         $query = "SELECT year as y,COUNT(s_id) as fail,(SELECT COUNT(s_id) FROM student_course WHERE course_id=(SELECT course_code FROM course where lect_username=$lect_username) AND year=y) as total FROM student_course WHERE course_id=(SELECT course_code FROM course where lect_username=$lect_username) AND exam_grade='W' GROUP BY YEAR";
 
         $result = self::$db->select($query);
-
         return $result;
       }
-
       
-
-
-
     }
 ?>
