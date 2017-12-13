@@ -66,23 +66,23 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			$sar_controller->import_reg();
 			break;
 		case 'reports':
-        	$sar_controller->reports();
+        	$caa_exam_controller->reports();
         	break;
         case 'profile':
         	$caa_exam_controller->profile();
         	break;
         case 'search_student':
-        	$sar_controller->search_user();
+        	$caa_exam_controller->search_user();
         	break;
-        case 'add_degree':
-        	$sar_controller->degree();
+        case 'add_course':
+        	$caa_exam_controller->course();
         	break;	
 
-        case 'reg_degree':
-        	$sar_controller->regDegree();	
+        case 'reg_course':
+        	$sar_controller->regCourse();	
         	break;	
-        case 'view_degree':
-        	$sar_controller->viewDegree();	
+        case 'view_course':
+        	$sar_controller->viewCourse();	
         	break;	
         case 'edit_User':
             $sar_controller->edit_user($var1);
@@ -118,7 +118,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 	 		}
 
 	 		function reports(){
-	 			header("Location:../view/sar_report.php");
+	 			header("Location:../view/caa_exam_reports.php");
 	 		}
 
 	 		function profile(){
@@ -135,11 +135,11 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  			
  			}
  			function search_user(){
-				header("Location:../view/sar_search_student.php");
+				header("Location:../view/caa_exam_search_students.php");
 			}
 
-			function degree(){
-				header("Location:../view/add_degree.php");
+			function course(){
+				header("Location:../view/add_course.php");
 			}
 
 			function regDegree(){
@@ -180,11 +180,11 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 
 		function edit_user($var1){
 
-            $result = self::$sar->search_degree($var1);
+            $result = self::$sar->search_course($var1);
 
             if($result){
                 $_SESSION['degree']=$result;
-                header("Location:../view/edit_degree.php");
+                header("Location:../view/edit_course.php");
             }else{
                 echo "something wrong";
             }

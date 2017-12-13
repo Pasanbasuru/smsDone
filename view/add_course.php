@@ -1,57 +1,11 @@
 <?php
-	 @session_start();
+	@session_start();
         if(!isset($_SESSION['user'])){
             header("Location:../index.php");
         }
-	   
+	    
 
 ?>
-<?php  
-//export.php  
-$connect = mysqli_connect("localhost", "root", "", "sms");
-$output = '';
-if(isset($_POST["export"]))
-{
- $query = "SELECT * FROM user";
- $result = mysqli_query($connect, $query);
- if(mysqli_num_rows($result) > 0)
- {
-  $output .= '
-   <table class="table" bordered="1">  
-                    <tr>  
-                         <th>Name</th>  
-                         <th>Address</th>  
-                         <th>City</th>  
-       <th>Postal Code</th>
-       <th>Country</th>
-                    </tr>
-  ';
-  while($row = mysqli_fetch_array($result))
-  {
-   $output .= '
-    <tr>  
-                         <td>'.$row["username"].'</td>  
-                         <td>'.$row["first_name"].'</td>  
-                         <td>'.$row["last_name"].'</td>  
-       <td>'.$row["type"].'</td>  
-       <td>'.$row["nic"].'</td>
-                    </tr>
-   ';
-  }
-  $output .= '</table>';
-  header('Content-Type: application/xls');
-  header('Content-Disposition: attachment; filename=download.xls');
-  echo $output;
- }
-}
-?>
-<?php
-$connect = mysqli_connect("localhost", "root", "", "sms");
-$sql = "SELECT * FROM user";  
-$result = mysqli_query($connect, $sql);
-?>
-
-
 
 
 <!DOCTYPE html>
@@ -66,9 +20,6 @@ $result = mysqli_query($connect, $sql);
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>  
 </head>
 
 <body class="home">
@@ -82,12 +33,12 @@ $result = mysqli_query($connect, $sql);
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Registration</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Students</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
+                        <li ><a href="../controller/caa_exam_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=results"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">results</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
+                        <li class="active"><a href="../controller/caa_exam_controller.php?op=add_course"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Course</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -150,59 +101,32 @@ $result = mysqli_query($connect, $sql);
                     </header>
                 </div>
                 <div class="user-dashboard">
-
-                <h1>Reports</h1>
-                    <div class="row">
-                        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
-
-                            <div class="sales">
-                                <h2>All students</h2>
-
-                                <div class="btn-group">
-                                   <a href="sar_report_1.php" class="btn btn-info" role="button">All students</a>
-
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
-
-                            <div class="sales report">
-                                <h2>First Year Students</h2>
-                                <div class="btn-group">
-                                     <a href="sar_report_2.php" class="btn btn-info" role="button">All students</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <br><br>
-                        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
-
-                            <div class="sales report">
-                                <h2>Secondd Year Students</h2>
-                                <div class="btn-group">
-                                     <a href="sar_report_3.php" class="btn btn-info" role="button">All students</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-5 col-sm-5 col-xs-12 gutter">
-
-                            <div class="sales report">
-                                <h2>Compute Science Students</h2>
-                                <div class="btn-group">
-                                     <a href="sar_report_4.php" class="btn btn-info" role="button">All students</a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                                    <div class="container">  
-                   <br />  
-                   <br />  
-                   <br />  
-                    
-                  </div>  
+                 
                 </div>
+
+                 <h1 style="text-align: center; padding-top: 5%;"> <strong>Degree Courses</strong> </h1>
+                    <br><br>  
+                    <div  style="padding-top: 5%; padding-left: 15%;">            
+                    <a href="caa_reg_course.php"> <button type="button" class="btn btn-primary btn-lg" style="width: 80%;"> Register New Course</button> </a>
+                    <hr>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-9" style="padding-left: 15%; width: 91%;">
+                            <div class="sales">
+                                 <h2>All Degree Courses</h2>
+                               <div class="btn-group">
+                                    <a href="../controller/caa_exam_controller.php?op=view_course"><button type="button" 
+                                   style="" class="btn btn-primary btn"  > View and Update Degree Courses </button> </a> <br><br> 
+                               </div>
+                            </div>
+                        </div>
+
+                        
+
+                        
+                    </div>
+                 
             </div>
         </div>
 

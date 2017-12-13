@@ -27,7 +27,7 @@ class GoogleAuth
 			
 			$this->client->setClientId('1052956449818-4kepfekionm9s1v2918rc4nf3ubp7n1n.apps.googleusercontent.com');
 			$this->client->setClientSecret('2anveGb67UBW96OKH7J60oyU');
-			$this->client->setRedirectUri('http://127.0.0.1/dashboard/sms_final2/controller/google_controller.php');
+			$this->client->setRedirectUri('http://127.0.0.1/dashboard/smsDone/controller/google_controller.php');
 			$this->client->setScopes('email'); 
 			$guzzleClient = new \GuzzleHttp\Client(array( 'curl' => array( CURLOPT_SSL_VERIFYPEER => false, ), ));
 			$this->client->setHttpClient($guzzleClient);
