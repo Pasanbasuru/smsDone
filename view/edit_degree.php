@@ -1,4 +1,3 @@
-
 <?php
 @session_start();
 $result='';
@@ -8,11 +7,19 @@ if(isset($_GET['result'])){
 else{
     $result=null;
 }
-if(isset($_GET['status'])){
-    $status=$_GET['status'];
-}
-else{
-    $status=null;
+?>
+<?php
+if(isset($_SESSION['degree'])){
+
+    foreach ($_SESSION['degree'] as $d) {
+        $f=$d['name'];
+        $l=$d['duration'];
+        $u=$d['description'];
+        $n=$d['start_year'];
+       
+
+
+    }
 }
 ?>
 
@@ -25,15 +32,12 @@ else{
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../view/css/style2.css">
     <link rel="stylesheet" type="text/css" href="../view/css/style1.css">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="test/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="../view/js/jquery-3.2.1.min.js"></script>
-    <script src="../view/js/jquery.tabledit.min.js"></script>
-    <script src="../view/js/jquery.tabledit.js"></script>
-    <script src="../view/js/jquery.min.js"></script>
 </head>
 
 <body class="home">
@@ -50,7 +54,7 @@ else{
                         <li ><a href="../controller/sar_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=registration"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Registration</span></a></li>
-                        <li><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
+                        <li ><a href="../controller/sar_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
                         <li class="active"><a href="../controller/sar_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
                         <li><a href="../controller/sar_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
@@ -115,25 +119,65 @@ else{
                     </header>
                 </div>
                 <div class="user-dashboard">
-                <div class="panel-heading">
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <?php echo $status; ?>
-                        </div>
+                 <div class="modal-content">
+                    <div class="modal-header login-header">
+                        <h4 class="modal-title">Update Degree Form</h4>
                     </div>
-                    <div class="form-group">
-                        <div class="col-sm-10 col-sm-offset-2">
-                            <?php echo $result; ?>
-                        </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" action="../controller/sar_controller.php" method="post" id="myform">
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <?php echo $result; ?>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-10 col-sm-offset-2">
+                                    <?php echo $result; ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Degree Name :</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="username"  name="name" value="<?php echo $f?>" placeholder="Degree Name" required />
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Description :</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="nic" type="text" name="des" value="<?php echo $u;?>" placeholder="Description" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Duration :</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="fname" type="text" name="dur" value="<?php echo $l;?>" placeholder="Duration" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">Start Year :</label>
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="lname" type="text" name="year" value="<?php echo $n;?>" placeholder="Start Year" required/>
+                                </div>
+                            </div>
+
+                            
+
+                            
+                            <div class="modal-footer">
+                                <button type="submit" class="add-project" data-dismiss="modal" name="op" value="Updated">Update</button>
+                                <a href="../view/view_degree.php"><button type="button" class="add-project" data-dismiss="modal">Cancel</button></a>
+                            </div>
+
+
+                        </form>
                     </div>
-                    <h4>
-                        <b>Student Details</b>
-                    </h4>
-                    <label><input type="text" name="search_text" id="search_text" placeholder="Search by User Details" class="form-control" /></label>
                 </div>
-
-
-                <div id="result"></div>
+                </div>
             </div>
         </div>
 
@@ -141,35 +185,5 @@ else{
     
 
 </body>
-<script>
-    $(document).ready(function(){
-
-        load_data();
-
-        function load_data(query)
-        {
-            $.ajax({
-                url:"fetch_degree.php",
-                method:"POST",
-                data:{query:query},
-                success:function(data)
-                {
-                    $('#result').html(data);
-                }
-            });
-        }
-        $('#search_text').keyup(function(){
-            var search = $(this).val();
-            if(search != '')
-            {
-                load_data(search);
-            }
-            else
-            {
-                load_data();
-            }
-        });
-    });
-</script>
 
 </html>
