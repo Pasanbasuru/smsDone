@@ -1,10 +1,94 @@
 <?php
-	@session_start();
+    if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERVER['SCRIPT_FILENAME'] ) ) {
+            /* 
+               Up to you which header to send, some prefer 404 even if 
+               the files does exist for security
+            */
+            header( 'HTTP/1.0 403 Forbidden', TRUE, 403 );
+
+            /* choose the appropriate page to redirect users */
+          //  die( header( 'location: /error.php' ) );
+
+        }
+
+        @session_start();
         if(!isset($_SESSION['user'])){
             header("Location:../index.php");
         }
-	    
-die("d");
+
+?>
+<?php
+require('../model/caa_exam_model.php');
+require('../model/db_model.php');
+$db = new DB();
+ 
+
+$sar = new CaaExamModel();
+$output = '';
+$rows = 0;
+if(isset($_POST["import"]))
+{
+ $e = explode(".", $_FILES["excel"]["name"]);
+ $extension = end($e); // For getting Extension of selected file
+ $allowed_extension = array("xls", "xlsx"); //allowed extension
+ if(in_array($extension, $allowed_extension)) //check selected file extension is present in allowed extension array
+ {
+  $file = $_FILES["excel"]["tmp_name"]; // getting temporary source of excel file
+  include("../Classes/PHPExcel/IOFactory.php"); // Add PHPExcel Library in this code
+  $objPHPExcel = PHPExcel_IOFactory::load($file); // create object of PHPExcel library by using load() method and in load method define path of selected file
+        
+        
+  $output .= "<label class='text-success'>Data Inserted</label><br /><table class='table table-bordered'>";
+
+  $output .= "<tr style='color:green;'>";
+        $output .= '<th style = "font-weight: bold;">'."index no".'</th>';
+        $output .= '<th style = "font-weight: bold;">'."Exam results".'</th>';
+        $output .= '<th style = "font-weight: bold;">'."Assignments".'</th>';
+       
+  foreach ($objPHPExcel->getWorksheetIterator() as $worksheet)
+  {
+   $highestRow = $worksheet->getHighestRow();
+   for($row=2; $row<=$highestRow; $row++)
+   {
+   
+    $index = $db->quote($worksheet->getCellByColumnAndRow(0, $row)->getValue());
+    $exam= $db->quote($worksheet->getCellByColumnAndRow(1, $row)->getValue());
+    $ass = $db->quote($worksheet->getCellByColumnAndRow(2, $row)->getValue());
+    
+
+    if($index=="''"){
+        break;
+    }   
+        
+    
+    $row_c= $caa_exam->result($index, $exam, $ass);
+    if($row_c==1){
+        $rows++;
+        $output .= "<tr style='color:blue;'>";
+        $output .= '<td>'.$index.'</td>';
+        $output .= '<td>'.$exam.'</td>';
+        $output .= '<td>'.$ass.'</td>';
+       
+
+      
+        $output .= '</tr>';
+    }else{
+        $output .= "<tr style='color:red;'>";
+        $output .= '<td>'.$index.'</td>';
+        $output .= '<td>'.$exam.'</td>';
+        $output .= '<td>'.$ass.'</td>';
+        $output .= '</tr>';
+    }
+   }
+  } 
+  $output .= '</table>';
+
+ }
+ else
+ {
+  $output = '<label class="text-danger">Invalid File</label>'; //if non excel file then
+ }
+}
 ?>
 
 
@@ -33,9 +117,9 @@ die("d");
                 </div>
                 <div class="navi">
                     <ul>
-                        <li class="active"><a href="../controller/caa_exam_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
+                        <li ><a href="../controller/caa_exam_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
-                        <li><a href="../controller/caa_exam_controller.php?op=results"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Results</span></a></li>
+                        <li class="active"><a href="../controller/caa_exam_controller.php?op=results"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Results</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Courses</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
@@ -101,7 +185,26 @@ die("d");
                     </header>
                 </div>
                 <div class="user-dashboard">
-                 sds
+                  <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+         <strong><?php if($rows>0){ echo $rows." results added";}else{echo "no results added yet";}?></strong> 
+        </div>
+                  <div class="container box navd " style="overflow-x:scroll; white-space: nowrap;  ">
+                
+                  
+                   <h3 align="center">Enter results</h3><br />
+                   <form method="post" enctype="multipart/form-data">
+                    <label>Select Excel File</label>
+                    <input type="file" name="excel" />
+                    <br />
+                    <input type="submit" name="import" class="btn btn-info" value="Import" />
+                   </form>
+                   <br />
+                   <br />
+                   <?php
+                   echo $output;
+                   ?>
+                  </div> 
 
                 </div>
             </div>

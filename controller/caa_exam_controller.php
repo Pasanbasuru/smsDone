@@ -1,5 +1,5 @@
 <?php
-die("sa");
+
 ob_start();
 session_start();
 if(isset($_SESSION['type']) && isset($_SESSION['user'])){
@@ -41,6 +41,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
  }
 
  	// load the view
+
 	require('../view/caa_exam.php');
 	
  	require('../model/caa_exam_model.php');
@@ -53,13 +54,13 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 		$op="edit_User";
 	}
 
-	$caa_exam_controller = new SarController();
+	$caa_exam_controller = new CaaExamController();
 	
 	switch ($op) {
 
-		case 'registration':
+		case 'results':
 		
-			$caa_exam_controller->registration();
+			$caa_exam_controller->results();
 			break;
 		case 'import_reg':
 			$sar_controller->import_reg();
@@ -68,7 +69,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
         	$sar_controller->reports();
         	break;
         case 'profile':
-        	$sar_controller->profile();
+        	$caa_exam_controller->profile();
         	break;
         case 'search_student':
         	$sar_controller->search_user();
@@ -95,21 +96,21 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 			break;
 	}
 
-	class SarController{
+	class CaaExamController{
 	 		protected static $db;
-	 		protected static $sar;
+	 		protected static $caa_exam;
 	 		
 
 	 		function __construct(){
 	 			self::$db = new DB();
-	 			self::$sar= new SarModel(); 			
+	 			self::$caa_exam= new CaaExamModel(); 			
 	 		}
 
 	 		
 
-	 		function registration(){
+	 		function results(){
 	 			
-	 			header("Location:../view/sar_registration.php");
+	 			header("Location:../view/caa_exam_results.php");
 	 		}
 
 	 		function import_reg(){
@@ -123,10 +124,10 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 	 		function profile(){
 
  			
- 				$result = self::$sar->profile();
+ 				$result = self::$caa_exam->profile();
  			if($result){
 				$_SESSION['value']=$result;
-				header("Location:../view/sar_profile.php");
+				header("Location:../view/caa_exam_profile.php");
 			}else{
 				echo "something wrong";
 			}

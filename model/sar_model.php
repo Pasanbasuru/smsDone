@@ -126,16 +126,24 @@
         $query = "SELECT course_code FROM course WHERE year=$curYear and semester=1 and course_year=1";
 
         $result = self::$db->select($query);
-
+       
         for($i=0;$i<count($result);$i++){
-
-            $c_id = self::$db->quote($result[$i]['course_code']);
-
-            $query = "INSERT INTO student_course(s_id,course_id,year) VALUES($id,$c_id,$curYear)";
             
-             $result = self::$db->query($query);
+            $c_id = self::$db->quote($result[$i]['course_code']);
+            
+            $this->addCourseM($curYear,$id,$c_id);
 
         }
+
+      
+       
+     }
+     function addCourseM($curYear,$id,$c_id){
+            $query = "INSERT INTO student_course(s_id,course_id,year) VALUES($id,$c_id,$curYear)";
+           
+            
+            $result = self::$db->query($query);
+
      }
      function profile(){
         $id = $_SESSION['id'];

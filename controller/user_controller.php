@@ -28,8 +28,8 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 		case 'SAR_exam':
 			header("Location:sar_controller.php");
 			break;
-		case 'CAA_exam':	
-			header("Location:caa_exam_contoller.php");
+		case 'CAA_exam':
+			header("Location:caa_exam_controller.php");	
 			break;
 
         case 'ar_acedemic':

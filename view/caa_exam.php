@@ -4,7 +4,7 @@
             header("Location:../index.php");
         }
 	    
-die("d");
+
 ?>
 
 
@@ -35,9 +35,9 @@ die("d");
                     <ul>
                         <li class="active"><a href="../controller/caa_exam_controller.php"><i class="fa fa-home" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Home</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=profile"><i class="fa fa-tasks" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Profile</span></a></li>
-                        <li><a href="../controller/caa_exam_controller.php?op=results"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Results</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=results"><i class="fa fa-bar-chart" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Course Registration</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=search_student"><i class="fa fa-user" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Student</span></a></li>
-                        <li><a href="../controller/caa_exam_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Courses</span></a></li>
+                        <li><a href="../controller/caa_exam_controller.php?op=add_degree"><i class="fa fa-calendar" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Degree</span></a></li>
                         <li><a href="../controller/caa_exam_controller.php?op=reports"><i class="fa fa-cog" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Reports</span></a></li>
                     </ul>
                 </div>
@@ -101,7 +101,7 @@ die("d");
                     </header>
                 </div>
                 <div class="user-dashboard">
-                 sds
+                 <iframe src="https://calendar.google.com/calendar/embed?src=en.lk%23holiday%40group.v.calendar.google.com&ctz=Asia%2FColombo" style="border: 0" width="1200" height="600" frameborder="0" scrolling="no"></iframe>
 
                 </div>
             </div>
