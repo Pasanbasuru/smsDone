@@ -99,6 +99,7 @@ if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERV
 
 
  	}
+ 	//get the student basic details
  	function search_student($st_id){
  		$query = "SELECT * FROM `student` WHERE s_id = {$st_id} ";
 
@@ -106,7 +107,62 @@ if ( $_SERVER['REQUEST_METHOD']=='GET' && realpath(__FILE__) == realpath( $_SERV
 
 		return $result;
  	}
+    //get the student address details
+     function search_student_address($st_id){
+         $query = "SELECT * FROM `student_address` WHERE s_id = {$st_id} ";
 
+         $result = self::$db->select($query);
+
+         return $result;
+     }
+     //get the student contact details
+     function search_student_contact($st_id){
+         $query = "SELECT * FROM `student_contact` WHERE s_id = {$st_id} ";
+
+         $result = self::$db->select($query);
+
+         return $result;
+     }
+     //get the student family details
+     function search_student_family($st_id){
+         $query = "SELECT * FROM `student_family` WHERE s_id = {$st_id} ";
+
+         $result = self::$db->select($query);
+
+         return $result;
+     }
+     //get the student degree details
+     function search_student_degree($st_id){
+         $query = "SELECT * FROM `student_degree` WHERE s_id = {$st_id} ";
+
+         $result = self::$db->select($query);
+
+         return $result;
+     }
+     //get the student course details
+     function search_student_course($st_id){
+         $query = "SELECT * FROM `student_course` WHERE s_id = {$st_id} ";
+
+         $result = self::$db->select($query);
+
+         return $result;
+     }
+     //get the student hostal details
+     function search_student_hostal($st_id){
+         $query = "SELECT * FROM `student_hostel` WHERE s_id = {$st_id} ";
+
+         $result = self::$db->select($query);
+
+         return $result;
+     }
+     //get the student scholarship details
+     function search_student_scholarship($st_id){
+         $query = "SELECT * FROM `student_scholar` WHERE s_id = {$st_id} ";
+
+         $result = self::$db->select($query);
+
+         return $result;
+     }
  	function hashPassword($password){
  		//using bcrypt 
  		$option = ['cost' => 12];

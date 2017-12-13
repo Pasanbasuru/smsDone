@@ -13,7 +13,17 @@ else{
 $s_id='';
 $fname='';
 $lname='';
-$area='';
+$midname='';
+$school='';
+$bday='';
+$race='';
+$religion='';
+$reg='';
+$out='';
+$gender='';
+$nic='';
+$index='';
+//check the student main details session is valid
 if(isset($_SESSION['details'])){
     foreach ($_SESSION['details'] as $user) {
         $s_id=$user['s_id'];
@@ -31,6 +41,121 @@ if(isset($_SESSION['details'])){
         $index=$user['index_no'];
     }
 }
+//check the student address details session is valid
+$no="";
+$street="";
+$town="";
+if(isset($_SESSION['adddetails'])){
+    foreach ($_SESSION['adddetails'] as $user) {
+        $no=$user['number_'];
+        $street=$user['street'];
+        $town=$user['town'];
+
+
+    }
+}
+//check the student contact details session is valid
+$contact1="";
+$contact2="";
+$emg_contact="";
+$emg_person="";
+
+if(isset($_SESSION['condetails'])){
+    foreach ($_SESSION['condetails'] as $user) {
+        $contact1=$user['contact1'];
+        $contact2=$user['contact2'];
+        $emg_contact=$user['emg_contact'];
+        $emg_person=$user['emg_person'];
+
+    }
+}
+//check the student course details session is valid
+$course_id="";
+$exam_grade="";
+$assignment_grade="";
+$cstart_date="";
+$cend_date="";
+$attendance="";
+$attempt="";
+$year="";
+
+if(isset($_SESSION['coursedetails'])){
+    foreach ($_SESSION['coursedetails'] as $user) {
+        $course_id=$user['course_id'];
+        $exam_grade=$user['exam_grade'];
+        $assignment_grade=$user['assignment_grade'];
+        $cstart_date=$user['start_date'];
+        $cend_date=$user['end_date'];
+        $attendance=$user['attendance'];
+        $attempt=$user['attempt'];
+        $year=$user['year'];
+        if(!$exam_grade or !$assignment_grade or !$cstart_date or !$cend_date or !$attendance or !$attempt or !$year){
+            $exam_grade="-";
+            $assignment_grade="-";
+            $cstart_date="-";
+            $cend_date="-";
+            $attendance="-";
+            $attempt="-";
+            $year="-";
+        }
+
+    }
+}
+//check the degree  details session is valid
+$dstart_date="";
+$degree_id="";
+$dend_date="";
+$class="";
+
+if(isset($_SESSION['degdetails'])){
+    foreach ($_SESSION['degdetails'] as $user) {
+        $degree_id=$user['degree_id'];
+        $dstart_date=$user['start_date'];
+        $dend_date=$user['end_date'];
+        $class=$user['class'];
+        if(!$dstart_date or !$dend_date or !$class){
+            $dstart_date="-";
+            $dend_date="-";
+            $class="-";
+        }
+
+    }
+}
+//check the family  details session is valid
+$father_name="";
+$mother_name="";
+$spouse="";
+if(isset($_SESSION['famdetails'])){
+    foreach ($_SESSION['famdetails'] as $user) {
+        $father_name=$user['father_name'];
+        $mother_name=$user['mother_name'];
+        $spouse=$user['spouse'];
+        if(!$father_name or !$mother_name or !$spouse){
+            $father_name="-";
+            $mother_name="-";
+            $spouse="-";
+        }
+
+    }
+}
+//check the hostal  details session is valid
+$hostel_id="";
+$hstart_date="";
+$hend_date="";
+if(isset($_SESSION['hosdetails'])){
+    foreach ($_SESSION['hosdetails'] as $user) {
+        $hostel_id=$user['hostel_id'];
+        $hstart_date=$user['start_date'];
+        $hend_date=$user['end_date'];
+        if(!$hend_date or !$hstart_date ){
+            $hend_date="-";
+            $hstart_date="-";
+        }
+
+    }
+}
+//check the scholar  details session is valid
+
 ?>
 
 <!DOCTYPE html>
@@ -174,7 +299,10 @@ if(isset($_SESSION['details'])){
                                         <li class="active"><a data-toggle="tab" href="#Summery" class="text-success"><i class="fa fa-indent"></i> Summery</a></li>
                                         <li><a data-toggle="tab" href="#Contact" class="text-success"><i class="fa fa-bookmark-o"></i> Contact Info</a></li>
                                         <li><a data-toggle="tab" href="#Address" class="text-success"><i class="fa fa-home"></i> Address</a></li>
-                                        <li><a data-toggle="tab" href="#General" class="text-success"><i class="fa fa-info"></i> General Info</a></li>
+                                        <li><a data-toggle="tab" href="#Degree" class="text-success"><i class="fa fa-info"></i> Degree and Course Info</a></li>
+                                        <li><a data-toggle="tab" href="#Family" class="text-success"><i class="fa fa-university"></i> Family Info</a></li>
+                                        <li><a data-toggle="tab" href="#Hostal" class="text-success"><i class="fa fa-home"></i> Hostal Info</a></li>
+                                        <li><a data-toggle="tab" href="#Scholar" class="text-success"><i class="fa fa-thumbs-up"></i> Scholar Info</a></li>
                                     </ul>
 
 
@@ -224,19 +352,22 @@ if(isset($_SESSION['details'])){
                                             </div>
                                         </div>
 
-                                        <div id="Address" class="tab-pane fade">
+                                        <div id="Family" class="tab-pane fade">
                                             <div class="table-responsive panel">
                                                 <table class="table">
                                                     <tbody>
 
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-home"></i> Address</td>
-                                                        <td>
-                                                            <address>
-
-                                                                <?php echo $area; ?>
-                                                            </address>
-                                                        </td>
+                                                        <td class="text-success"><i class="fa fa-user"></i> Father Name</td>
+                                                        <td><?php echo $father_name;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-user"></i> Mother Name</td>
+                                                        <td><?php echo $mother_name;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-user"></i> Spouse</td>
+                                                        <td><?php echo $spouse;?></td>
                                                     </tr>
                                                     </tbody>
                                                 </table>
@@ -248,83 +379,146 @@ if(isset($_SESSION['details'])){
                                                     <tbody>
 
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-envelope-o"></i> Email ID</td>
-                                                        <td><a href="mailto:****@pawanmall.net?subject=Email from &amp;body=Hello, Viddhyut Mall">****@pawanmall.net</a></td>
+                                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i> Mobile Number </td>
+                                                        <td><?php echo $contact1;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i> Mobile Number</td>
-                                                        <td>88********</td>
+                                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i> Land Line Number</td>
+                                                        <td><?php echo $contact2;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-flag"></i> Nationality</td>
-                                                        <td>Indian</td>
+                                                        <td class="text-success"><i class="fa fa-flag"></i> Emergency Contact</td>
+                                                        <td><?php echo $emg_contact;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-user"></i> Father's Name</td>
-                                                        <td>Ajay Mall</td>
+                                                        <td class="text-success"><i class="fa fa-user"></i> Emergency Person</td>
+                                                        <td><?php echo $emg_person;?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i> Father's Mobile</td>
-                                                        <td>+91 99********</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-success"><i class="fa fa-user"></i> Mother's Name</td>
-                                                        <td>Hemlata Mall</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i> Mother's Mobile</td>
-                                                        <td>+91 90********</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-success"><i class="fa fa-user"></i> Emergency Contact Person</td>
-                                                        <td>Pawan Mall</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="text-success"><i class="glyphicon glyphicon-phone"></i> Emergency Contact Person's Mobile</td>
-                                                        <td>+91 88********</td>
-                                                    </tr>
+
 
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
-                                        <div id="General" class="tab-pane fade">
+                                        <div id="Degree" class="tab-pane fade">
                                             <div class="table-responsive panel">
                                                 <table class="table">
                                                     <tbody>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-university"></i> Last School</td>
-                                                        <td>Pawan Mall's School</td>
+                                                        <td class="text-success"><i class="fa fa-university"></i> Degree ID</td>
+                                                        <td><?php echo $degree_id?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-calendar"></i> Date of Admission</td>
-                                                        <td>March 4, 2009</td>
+                                                        <td class="text-success"><i class="fa fa-calendar"></i> Start Date</td>
+                                                        <td><?php echo $dstart_date;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-home"></i> Birth Place</td>
-                                                        <td>Delhi</td>
+                                                        <td class="text-success"><i class="fa fa-home"></i> End Date</td>
+                                                        <td><?php echo $dend_date;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-home"></i> Class</td>
+                                                        <td><?php echo $class;?></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="text-success"><i class="fa fa-calendar"></i> Academic Year</td>
-                                                        <td>2015-2016</td>
+                                                        <td><?php echo $year;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-medkit"></i> Medical Condition</td>
-                                                        <td>Normal</td>
+                                                        <td class="text-success"><i class="fa fa-calendar"></i> Course ID</td>
+                                                        <td><?php echo $course_id;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="fa fa-thumbs-up"></i> Active/Inactive</td>
-                                                        <td>Student is Active</td>
+                                                        <td class="text-success"><i class="fa fa-calendar"></i> Exam Grade</td>
+                                                        <td><?php echo $exam_grade;?></td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="text-success"><i class="glyphicon glyphicon-time"></i> Last Editing</td>
-                                                        <td>2015-08-20 09:41:56</td>
+                                                        <td class="text-success"><i class="fa fa-calendar"></i> Assignment Grade </td>
+                                                        <td><?php echo $assignment_grade;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-calendar"></i> Start Date</td>
+                                                        <td><?php echo $cstart_date;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-calendar"></i> End Date</td>
+                                                        <td><?php echo $cend_date;?></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-thumbs-up"></i>Attendence</td>
+                                                        <td><?php echo $attendance;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="glyphicon glyphicon-time"></i> Attempt</td>
+                                                        <td><?php echo $attempt;?></td>
                                                     </tr>
 
                                                     </tbody>
                                                 </table>
                                             </div>
 
+                                        </div>
+                                        <div id="Address" class="tab-pane fade">
+                                            <div class="table-responsive panel">
+                                                <table class="table">
+                                                    <tbody>
+
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-home"></i>Home No</td>
+                                                        <td>
+                                                            <?php echo $no;?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-home"></i> Street</td>
+                                                        <td>
+                                                            <?php echo $street;?>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-home"></i> Town</td>
+                                                        <td>
+                                                            <?php echo $town;?>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div id="Hostal" class="tab-pane fade">
+                                            <div class="table-responsive panel">
+                                                <table class="table">
+                                                    <tbody>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-university"></i> Hostal ID</td>
+                                                        <td><?php echo $hostel_id;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-university"></i> Start Date</td>
+                                                        <td><?php echo $hstart_date;?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-success"><i class="fa fa-university"></i> End date</td>
+                                                        <td><?php echo $hend_date;?></td>
+                                                    </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+                                        </div>
+                                        <div id="Scholar" class="tab-pane fade">
+                                            <div class="table-responsive panel">
+                                                <table class="table">
+                                                    <tbody>
+
+                                                    
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
 
                                         <button name="op" value="cancel_changes" type="submit" class="btn btn-danger" style="float: right; margin-left: 10px;"><i class="fa fa-trash"></i> Cancel</button>

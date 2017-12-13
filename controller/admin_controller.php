@@ -399,18 +399,50 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 	//Return the more information about the student (Actually returns to the more.php page)
 	function show_moreinformation($var){
 		//get the student basic details
+        unset($_SESSION["condetails"]);
+        unset($_SESSION["adddetails"]);
+        unset($_SESSION["degdetails"]);
+        unset($_SESSION["schdetails"]);
+        unset($_SESSION["famdetails"]);
+        unset($_SESSION["coursedetails"]);
+        unset($_SESSION["hosdetails"]);
         $result = self::$admin->search_student($var);
+        $conresult = self::$admin->search_student_contact($var);
+        $addresult = self::$admin->search_student_address($var);
+        $degresult = self::$admin->search_student_degree($var);
+        $hosresult = self::$admin->search_student_hostal($var);
+        $schoresult = self::$admin->search_student_scholarship($var);
+        $famresult = self::$admin->search_student_family($var);
+        $courseresult = self::$admin->search_student_course($var);
         //get the student schol details
        // $result = self::$admin->search_student($var);
         //get the student
         //$result = self::$admin->search_student($var);
         if ($result) {
-
             $_SESSION['details'] = $result;
-            header("Location:../view/edit_view_more_student_detail.php");
-
-
         }
+        if ($conresult) {
+            $_SESSION['condetails'] = $conresult;
+        }
+        if ($addresult) {
+            $_SESSION['adddetails'] = $addresult;
+        }
+        if ($degresult) {
+            $_SESSION['degdetails'] = $degresult;
+        }
+        if ($schoresult) {
+            $_SESSION['schdetails'] = $schoresult;
+        }
+        if ($famresult) {
+            $_SESSION['famdetails'] = $famresult;
+        }
+        if ($courseresult) {
+            $_SESSION['coursedetails'] = $courseresult;
+        }
+        if ($hosresult) {
+            $_SESSION['hosdetails'] = $hosresult;
+        }
+        header("Location:../view/edit_view_more_student_detail.php");
     }
     //Admin delete Student
     function delete($del_id){
@@ -452,6 +484,7 @@ if(isset($_SESSION['type']) && isset($_SESSION['user'])){
 
 
         }
+        //User Edit
         function edit_user($var1){
 
             $result = self::$admin->search_user($var1);
